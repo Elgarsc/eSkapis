@@ -2,7 +2,7 @@
 
 ## Pirms megini runot jaielade un jasetupo postgres, shadcn, next.js, react ##
 
-##Vel vajag:##
+##Vel vajag:
 1. Authentification (
 2. Lai pie Select outfit dropdowni un pogas strada
 3. Lai Outfit preview strada ar bultinam un lai radas bildes
