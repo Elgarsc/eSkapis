@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useDropzone } from "react-dropzone";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useUser } from "@clerk/nextjs";
 
-// Import the server-side action
 import { clothingCreate } from "@/app/actions/clothingCreate";
 
 interface AddItemFormProps {
@@ -20,6 +20,8 @@ export function AddItemForm({ refreshClothingItems }: AddItemFormProps) {
   const [color, setColor] = useState("");
   const [image, setImage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useUser();
+  const userId = user?.id;
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -42,24 +44,28 @@ export function AddItemForm({ refreshClothingItems }: AddItemFormProps) {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError(null); // Clear any previous errors
+    setError(null);
 
     if (!image || !type || !name) {
       setError("Please complete all fields.");
       return;
     }
 
-    // Call the server-side action to create the clothing item
+    if (!userId) {
+      setError("You must be logged in to add items.");
+      return;
+    }
+
     try {
-      await clothingCreate(name, type, color, image);
+      await clothingCreate(name, type, color, image, userId);
       setName("");
       setType("");
       setColor("");
       setImage(null);
-      refreshClothingItems(); // Refresh the clothing items after the new one is added
+      refreshClothingItems();
     } catch (err: any) {
       console.error("Failed to add clothing item:", err);
-      setError(err.message || "Failed to add item."); // Display the error to the user
+      setError(err.message || "Failed to add item.");
     }
   };
 
@@ -92,19 +98,17 @@ export function AddItemForm({ refreshClothingItems }: AddItemFormProps) {
 
       <div {...getRootProps()} className="border-2 border-dashed p-4 text-center cursor-pointer">
         <input {...getInputProps()} />
-        {
-            isDragActive ? (
-                <p>Drop the files here ...</p>
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <>
+            {image ? (
+              <img src={image} alt="Preview" className="max-h-40 mx-auto" />
             ) : (
-                <>
-                    {image ? (
-                        <img src={image} alt="Preview" className="max-h-40 mx-auto" />
-                    ) : (
-                        <p>Drag & drop an image here, or click to select a file</p>
-                    )}
-                </>
-            )
-        }
+              <p>Drag & drop an image here, or click to select a file</p>
+            )}
+          </>
+        )}
       </div>
 
       <Button type="submit">Add Item</Button>

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getClothingItems } from "@/app/actions/clothingCreate";
 import { createOutfit } from "@/app/actions/outfitActions";
+import { useUser } from "@clerk/nextjs";
 
 interface OutfitFormProps {
   refreshOutfits: () => void;
@@ -16,8 +17,8 @@ interface ClothingItem {
   id: number;
   name: string;
   type: string;
-  color?: string; 
-  image?: string; 
+  color?: string;
+  image?: string;
 }
 
 export function OutfitForm({ refreshOutfits }: OutfitFormProps) {
@@ -25,17 +26,21 @@ export function OutfitForm({ refreshOutfits }: OutfitFormProps) {
   const [topId, setTopId] = useState<number | null>(null);
   const [bottomId, setBottomId] = useState<number | null>(null);
   const [shoeId, setShoeId] = useState<number | null>(null);
-  const [clothingItems, setClothingItems] = useState<ClothingItem[]>([]); // Explicit type annotation
+  const [clothingItems, setClothingItems] = useState<ClothingItem[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useUser();
+  const userId = user?.id;
 
   useEffect(() => {
     const fetchItems = async () => {
-      const items = await getClothingItems();
-      console.log("Data from getClothingItems:", items);
-      setClothingItems(items);
+      if (userId) {
+        const items = await getClothingItems();
+        console.log("Data from getClothingItems:", items);
+        setClothingItems(items);
+      }
     };
     fetchItems();
-  }, []);
+  }, [userId]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -43,6 +48,11 @@ export function OutfitForm({ refreshOutfits }: OutfitFormProps) {
 
     if (!name || !topId || !bottomId || !shoeId) {
       setError("Please complete all fields.");
+      return;
+    }
+
+    if (!userId) {
+      setError("You must be logged in to create outfits.");
       return;
     }
 
