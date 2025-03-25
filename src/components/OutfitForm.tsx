@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getClothingItems } from "@/app/actions/clothingCreate";
 import { createOutfit } from "@/app/actions/outfitActions";
 import { useUser } from "@clerk/nextjs";
+import { OutfitPreview } from "@/components/OutfitPreview";
 
 interface OutfitFormProps {
   refreshOutfits: () => void;
@@ -74,56 +75,68 @@ export function OutfitForm({ refreshOutfits }: OutfitFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && <div className="text-red-500">{error}</div>}
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Outfit Name</label>
-        <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Outfit name" />
-      </div>
+    <div className="flex"> 
+      <div className="w-1/2 p-4"> 
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && <div className="text-red-500">{error}</div>}
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Outfit Name</label>
+            <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Outfit name" />
+          </div>
 
-      <div>
-        <label htmlFor="top" className="block text-sm font-medium text-gray-700">Top</label>
-        <Select value={topId ? topId.toString() : ""} onValueChange={(value) => setTopId(parseInt(value))}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select Top" />
-          </SelectTrigger>
-          <SelectContent>
-            {getItemsByType("top").map((item) => (
-              <SelectItem key={item.id} value={item.id.toString()}>{item.name}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+          <div>
+            <label htmlFor="top" className="block text-sm font-medium text-gray-700">Top</label>
+            <Select value={topId ? topId.toString() : ""} onValueChange={(value) => setTopId(parseInt(value))}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select Top" />
+              </SelectTrigger>
+              <SelectContent>
+                {getItemsByType("top").map((item) => (
+                  <SelectItem key={item.id} value={item.id.toString()}>{item.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-      <div>
-        <label htmlFor="bottom" className="block text-sm font-medium text-gray-700">Bottom</label>
-        <Select value={bottomId ? bottomId.toString() : ""} onValueChange={(value) => setBottomId(parseInt(value))}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select Bottom" />
-          </SelectTrigger>
-          <SelectContent>
-            {getItemsByType("bottom").map((item) => (
-              <SelectItem key={item.id} value={item.id.toString()}>{item.name}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+          <div>
+            <label htmlFor="bottom" className="block text-sm font-medium text-gray-700">Bottom</label>
+            <Select value={bottomId ? bottomId.toString() : ""} onValueChange={(value) => setBottomId(parseInt(value))}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select Bottom" />
+              </SelectTrigger>
+              <SelectContent>
+                {getItemsByType("bottom").map((item) => (
+                  <SelectItem key={item.id} value={item.id.toString()}>{item.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-      <div>
-        <label htmlFor="shoe" className="block text-sm font-medium text-gray-700">Shoes</label>
-        <Select value={shoeId ? shoeId.toString() : ""} onValueChange={(value) => setShoeId(parseInt(value))}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select Shoes" />
-          </SelectTrigger>
-          <SelectContent>
-            {getItemsByType("shoe").map((item) => (
-              <SelectItem key={item.id} value={item.id.toString()}>{item.name}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+          <div>
+            <label htmlFor="shoe" className="block text-sm font-medium text-gray-700">Shoes</label>
+            <Select value={shoeId ? shoeId.toString() : ""} onValueChange={(value) => setShoeId(parseInt(value))}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select Shoes" />
+              </SelectTrigger>
+              <SelectContent>
+                {getItemsByType("shoe").map((item) => (
+                  <SelectItem key={item.id} value={item.id.toString()}>{item.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-      <Button type="submit">Create Outfit</Button>
-    </form>
+          <Button type="submit">Create Outfit</Button>
+        </form>
+      </div>
+      <div className="w-1/2 p-4">
+        <OutfitPreview
+          topId={topId}
+          bottomId={bottomId}
+          shoeId={shoeId}
+          clothingItems={clothingItems}
+        />
+      </div>
+    </div>
   );
 }
