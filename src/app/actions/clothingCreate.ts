@@ -14,13 +14,10 @@ export async function clothingCreate(name: string, type: "top" | "bottom" | "sho
   try {
     const stmt = db.prepare("INSERT INTO clothing (name, type, color, image, user_id) VALUES (?, ?, ?, ?, ?)");
     stmt.run(name, type, color, image, userId);
-    revalidatePath('/');
   } catch (error) {
     console.error("Error creating clothing item:", error);
     throw new Error("Failed to create clothing item.");
   }
-
-  revalidatePath('/');
 }
 
 export async function getClothingItems() {
@@ -41,7 +38,7 @@ export async function getClothingItems() {
 }
 
 export async function deleteClothingItem(id: number) {
-  const { userId } = await auth(); // Get the user ID
+  const { userId } = await auth(); 
 
   if (!userId) {
     throw new Error("User not authenticated");
@@ -50,10 +47,8 @@ export async function deleteClothingItem(id: number) {
   try {
     const stmt = db.prepare("DELETE FROM clothing WHERE id = ? AND user_id = ?");
     stmt.run(id, userId);
-    revalidatePath('/');
   } catch (error) {
     console.error("Error deleting clothing item:", error);
     throw new Error("Failed to delete clothing item.");
   }
-  revalidatePath('/');
 }

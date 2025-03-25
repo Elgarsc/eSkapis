@@ -44,6 +44,7 @@ export function OutfitForm({ refreshOutfits }: OutfitFormProps) {
   }, [userId]);
 
   const handleSubmit = async (event: React.FormEvent) => {
+    window.location.reload();
     event.preventDefault();
     setError(null);
 

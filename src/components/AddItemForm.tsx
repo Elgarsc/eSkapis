@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useDropzone } from "react-dropzone";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 import { clothingCreate } from "@/app/actions/clothingCreate";
 
@@ -22,6 +23,7 @@ export function AddItemForm({ refreshClothingItems }: AddItemFormProps) {
   const [error, setError] = useState<string | null>(null);
   const { user } = useUser();
   const userId = user?.id;
+  const router = useRouter();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -63,6 +65,7 @@ export function AddItemForm({ refreshClothingItems }: AddItemFormProps) {
       setColor("");
       setImage(null);
       refreshClothingItems();
+      window.location.reload();
     } catch (err: any) {
       console.error("Failed to add clothing item:", err);
       setError(err.message || "Failed to add item.");

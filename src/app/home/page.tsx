@@ -5,25 +5,25 @@ import { AddItemForm } from "@/components/AddItemForm";
 import { ClothingList } from "@/components/ClothingList";
 import { OutfitForm } from "@/components/OutfitForm";
 import { getClothingItems } from "@/app/actions/clothingCreate";
-import { useEffect, useState } from "react";
+import { useEffect, useState,  useCallback } from "react";
 import { useRouter } from 'next/navigation';
 import { useUser } from "@clerk/nextjs";
-import { OutfitPreview } from "@/components/OutfitPreview"
 
 export default function Home() {
   const [clothingItems, setClothingItems] = useState([]);
   const router = useRouter();
-  const { isSignedIn, isLoaded } = useUser(); // Get isSignedIn and isLoaded
+  const { isSignedIn, isLoaded } = useUser(); 
 
   useEffect(() => {
-    if (isLoaded && !isSignedIn) { // Check if loaded and not signed in
-      router.push('/sign-in'); // Redirect to sign-in page
+    if (isLoaded && !isSignedIn) { 
+      router.push('/sign-in');
     }
   }, [isSignedIn, isLoaded, router]);
 
-  const refreshClothingItems = (newItems: any[]) => {
-    setClothingItems(newItems);
-  };
+  const refreshClothingItems = useCallback(async () => {
+    const items = await getClothingItems();
+    setClothingItems(items);
+  }, []);
 
   useEffect(() => {
     const fetchItems = async () => {
