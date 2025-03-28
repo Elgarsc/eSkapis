@@ -24,7 +24,7 @@ To get the project up and running locally, follow these steps:
 
 **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/eSkapis.git
+   git clone https://github.com/Elgarsc/eSkapis.git
    ```
 
 Install the dependencies:
