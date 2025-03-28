@@ -23,7 +23,7 @@
 
 To get the project up and running locally, follow these steps:
 
-1. **Clone the repository:**
+**Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/eSkapis.git
    ```
