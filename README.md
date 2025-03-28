@@ -30,7 +30,7 @@ To get the project up and running locally, follow these steps:
 
 Install the dependencies:
 
-bash```
+```bash
 cd eSkapis
 npm install
 ```
@@ -44,10 +44,9 @@ NEXT_PUBLIC_CLERK_FRONTEND_API=your-clerk-frontend-api-key
 CLERK_API_KEY=your-clerk-api-key
 Run the development server:
 
-bash
-Copy
-Edit
+```bash
 npm run dev
+```
 This will start the app in development mode. Open your browser and go to http://localhost:3000.
 
 Usage
