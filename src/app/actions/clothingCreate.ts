@@ -2,15 +2,25 @@
 "use server";
 
 import db from "@/lib/db";
-import { revalidatePath } from "next/cache";
-import { redirect } from 'next/navigation';
 import { auth } from "@clerk/nextjs/server";
+import { IClothingItem } from "@/types/outfit";
+
+function containsSQLInjectionRisk(input: string): boolean {
+  const forbiddenChars = /[;'"/*\\]/;
+  return forbiddenChars.test(input);
+}
 
 export async function clothingCreate(name: string, type: "top" | "bottom" | "shoe", color: string, image: string, userId: string) {
   if (!userId) {
-    throw new Error("User not authenticated");
+    throw Error("User not authenticated");
   }
-
+  if (
+    containsSQLInjectionRisk(userId) ||
+    containsSQLInjectionRisk(color) ||
+    containsSQLInjectionRisk(name)
+  ) {
+    throw new Error("Contains forbidden characters");
+  }
   try {
     const stmt = db.prepare("INSERT INTO clothing (name, type, color, image, user_id) VALUES (?, ?, ?, ?, ?)");
     stmt.run(name, type, color, image, userId);
@@ -20,16 +30,16 @@ export async function clothingCreate(name: string, type: "top" | "bottom" | "sho
   }
 }
 
-export async function getClothingItems() {
-  const { userId } = await auth(); // Get the user ID
+export async function getClothingItems(): Promise<IClothingItem[]>  {
+  const { userId } = await auth(); 
 
   if (!userId) {
-    return []; // Or throw an error, depending on your needs
+    return []; 
   }
 
   try {
     const stmt = db.prepare("SELECT * FROM clothing WHERE user_id = ?");
-    const clothingItems = stmt.all(userId);
+    const clothingItems = stmt.all(userId) as IClothingItem[];;
     return clothingItems;
   } catch (error) {
     console.error("Error fetching clothing items:", error);

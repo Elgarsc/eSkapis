@@ -37,7 +37,7 @@ export function OutfitPreview({ topId, bottomId, shoeId, clothingItems }: Outfit
   }, [shoeId, clothingItems]);
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow">
+    <div className="p-4 rounded-lg">
       <h3 className="text-lg font-semibold mb-4">Outfit Preview</h3>
       <div className="space-y-6">
         {top && (

@@ -8,9 +8,10 @@ import { getClothingItems } from "@/app/actions/clothingCreate";
 import { useEffect, useState,  useCallback } from "react";
 import { useRouter } from 'next/navigation';
 import { useUser } from "@clerk/nextjs";
+import { IClothingItem } from '../../../src/types/outfit';
 
 export default function Home() {
-  const [clothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState<IClothingItem[]>([]);;
   const router = useRouter();
   const { isSignedIn, isLoaded } = useUser(); 
 

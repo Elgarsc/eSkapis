@@ -9,6 +9,7 @@ import { getClothingItems } from "@/app/actions/clothingCreate";
 import { createOutfit } from "@/app/actions/outfitActions";
 import { useUser } from "@clerk/nextjs";
 import { OutfitPreview } from "@/components/OutfitPreview";
+import { IClothingItem } from "@/types/outfit";
 
 interface OutfitFormProps {
   refreshOutfits: () => void;

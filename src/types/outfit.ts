@@ -2,14 +2,16 @@
 export interface Outfit {
   id: string;
   name: string;
-  top: ClothingItem;
-  bottom: ClothingItem;
-  shoes: ClothingItem;
+  top: IClothingItem;
+  bottom: IClothingItem;
+  shoes: IClothingItem;
   tags: string[];
 }
 
-export interface ClothingItem {
+export interface IClothingItem {
   id: number;
   name: string;
   image: string;
+  color: string;
+  type: string;
 }

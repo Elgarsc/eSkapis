@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 export async function createOutfit(name: string, topId: number, bottomId: number, shoeId: number) {
-  const { userId } = await auth(); // Await the auth() function
+  const { userId } = await auth(); 
 
   if (!userId) {
     throw new Error("User not authenticated");
@@ -25,10 +25,10 @@ export async function createOutfit(name: string, topId: number, bottomId: number
 }
 
 export async function getOutfits() {
-  const { userId } = await auth(); // Await the auth() function
+  const { userId } = await auth(); 
 
   if (!userId) {
-    return []; // Or throw an error, depending on your needs
+    return []; 
   }
 
   try {
@@ -71,7 +71,7 @@ export async function getOutfits() {
         name: row.shoe_name,
         image: row.shoe_image,
       },
-      tags: row.tags ? row.tags.split(',') : [], // Split comma-separated tags into an array
+      tags: row.tags ? row.tags.split(',') : [],
     }));
 
     return outfits;
@@ -82,14 +82,13 @@ export async function getOutfits() {
 }
 
 export async function updateOutfitTags(outfitId: string, tags: string[]) {
-  const { userId } = await auth(); // Await the auth() function
+  const { userId } = await auth(); 
 
   if (!userId) {
     throw new Error("User not authenticated");
   }
 
   try {
-    // Ensure the outfit belongs to the user before updating
     const stmt = db.prepare("UPDATE outfits SET tags = ? WHERE id = ? AND user_id = ?");
     stmt.run(tags.join(','), outfitId, userId);
     revalidatePath('/outfits');
@@ -100,14 +99,13 @@ export async function updateOutfitTags(outfitId: string, tags: string[]) {
 }
 
 export async function deleteOutfit(outfitId: string) {
-  const { userId } = await auth(); // Await the auth() function
+  const { userId } = await auth();
 
   if (!userId) {
     throw new Error("User not authenticated");
   }
 
   try {
-    // Ensure the outfit belongs to the user before deleting
     const stmt = db.prepare("DELETE FROM outfits WHERE id = ? AND user_id = ?");
     stmt.run(outfitId, userId);
     revalidatePath('/outfits');
