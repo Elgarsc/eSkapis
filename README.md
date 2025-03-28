@@ -13,7 +13,6 @@
 ## Technologies Used
 
 - **Next.js**: A React framework used for server-side rendering (SSR) and building static websites.
-- **Prisma**: An ORM for interacting with the SQLite database to store clothing items and user data.
 - **Clerk**: A modern authentication service for managing user accounts, including sign-ups and log-ins.
 - **Tailwind CSS**: A utility-first CSS framework for building responsive designs.
 - **Lucide Icons**: A library for icons used in the UI.
@@ -37,11 +36,10 @@ npm install
 Set up environment variables:
 Create a .env.local file in the root directory and add your Clerk API keys and other necessary environment variables. Example:
 
-env
-Copy
-Edit
+```env
 NEXT_PUBLIC_CLERK_FRONTEND_API=your-clerk-frontend-api-key
 CLERK_API_KEY=your-clerk-api-key
+```
 Run the development server:
 
 ```bash
