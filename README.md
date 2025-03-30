@@ -18,6 +18,9 @@
 - **Lucide Icons**: A library for icons used in the UI.
 - **Next-Themes**: A simple way to implement theme switching (light/dark mode).
 
+## For visual representation of project view :
+https://miro.com/welcomeonboard/Skd2ZWxtd0JoZmZRUjN6N1Rmd09OWkYzbndrUTJ0WFZUQjRzZDlPU1d3a25pMDVhSXdtNjl1L0xsUEplOUlWc0pxajl6K2tKMWpKdkdKbytaWFN6MjF1RElhemxuRkFvZFRjd2NUNUpPcG5mK2dwLzFTa3daTVMwdmV5RkFQTDBQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=110350518009
+
 ## Installation
 
 To get the project up and running locally, follow these steps:
