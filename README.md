@@ -20,13 +20,13 @@
 
 ## Relations 
 
-Users → Clothing (One-to-Many) ✅
+### Users → Clothing (One-to-Many) ✅
 Each user can own multiple clothing items, but each clothing item belongs to only one user.
-Users → Outfits (One-to-Many) ✅
+### Users → Outfits (One-to-Many) ✅
 Each user can create multiple outfits, but each outfit belongs to only one user.
-Outfits → Clothing (Many-to-One) ✅
+### Outfits → Clothing (Many-to-One) ✅
 Each outfit has exactly one top, one bottom, and one pair of shoes from the clothing table.
-Outfits → Tags (Many-to-Many) ✅
+### Outfits → Tags (Many-to-Many) ✅
 Each outfit can have multiple tags, and each tag can belong to multiple outfits (via outfit_tags).
 
 ## For visual representation of project view :
