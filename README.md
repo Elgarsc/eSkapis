@@ -18,6 +18,17 @@
 - **Lucide Icons**: A library for icons used in the UI.
 - **Next-Themes**: A simple way to implement theme switching (light/dark mode).
 
+## Relations 
+
+Users → Clothing (One-to-Many) ✅
+Each user can own multiple clothing items, but each clothing item belongs to only one user.
+Users → Outfits (One-to-Many) ✅
+Each user can create multiple outfits, but each outfit belongs to only one user.
+Outfits → Clothing (Many-to-One) ✅
+Each outfit has exactly one top, one bottom, and one pair of shoes from the clothing table.
+Outfits → Tags (Many-to-Many) ✅
+Each outfit can have multiple tags, and each tag can belong to multiple outfits (via outfit_tags).
+
 ## For visual representation of project view :
 https://miro.com/welcomeonboard/Skd2ZWxtd0JoZmZRUjN6N1Rmd09OWkYzbndrUTJ0WFZUQjRzZDlPU1d3a25pMDVhSXdtNjl1L0xsUEplOUlWc0pxajl6K2tKMWpKdkdKbytaWFN6MjF1RElhemxuRkFvZFRjd2NUNUpPcG5mK2dwLzFTa3daTVMwdmV5RkFQTDBQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=110350518009
 
