@@ -48,4 +48,21 @@ if (!columnExists(db, 'outfits', 'user_id')) {
   console.log("Added user_id column to outfits table");
 }
 
+db.exec(`
+  CREATE TABLE IF NOT EXISTS tags (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE
+  );
+`);
+
+db.exec(`
+  CREATE TABLE IF NOT EXISTS outfit_tags (
+    outfit_id INTEGER NOT NULL,
+    tag_id INTEGER NOT NULL,
+    PRIMARY KEY (outfit_id, tag_id),
+    FOREIGN KEY (outfit_id) REFERENCES outfits(id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+  );
+`);
+
 export default db;

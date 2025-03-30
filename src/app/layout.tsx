@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
 import { ClerkProvider } from '@clerk/nextjs'
@@ -20,16 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-  
     <ClerkProvider afterSignInUrl="/" afterSignUpUrl="/"> 
      
       <html lang="en" suppressHydrationWarning>
-        <body
-          className={inter.className}
-        >
+        <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="dark">
-        <Navigation/>
-          {children}
+            <Navigation/>
+              {children}
           </ThemeProvider>
         </body>
       </html>
