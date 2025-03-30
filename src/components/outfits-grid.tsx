@@ -9,7 +9,7 @@ interface OutfitsGridProps {
   outfits: Outfit[]
   onAddTag: (outfitId: string, tag: string) => void
   onRemoveTag: (outfitId: string, tag: string) => void
-  onDeleteOutfit: (outfitId: string) => void // Add this prop
+  onDeleteOutfit: (outfitId: string) => void
 }
 
 export default function OutfitsGrid({ outfits, onAddTag, onRemoveTag, onDeleteOutfit }: OutfitsGridProps) {
@@ -21,7 +21,7 @@ export default function OutfitsGrid({ outfits, onAddTag, onRemoveTag, onDeleteOu
           outfit={outfit}
           onAddTag={onAddTag}
           onRemoveTag={onRemoveTag}
-          onDeleteOutfit={onDeleteOutfit} // Pass the prop
+          onDeleteOutfit={onDeleteOutfit} 
         />
       ))}
     </div>

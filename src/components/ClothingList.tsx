@@ -50,12 +50,12 @@ interface ClothingListProps {
 export function ClothingList({ clothingItems, refreshClothingItems }: ClothingListProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {Array.isArray(clothingItems) ? ( // Add this check
+      {Array.isArray(clothingItems) ? ( 
         clothingItems.map((item) => (
           <ClothingItem key={item.id} {...item} refreshClothingItems={refreshClothingItems} />
         ))
       ) : (
-        <div>No clothing items found.</div> // Or a loading indicator
+        <div>No clothing items found.</div>
       )}
     </div>
   );

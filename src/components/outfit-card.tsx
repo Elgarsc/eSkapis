@@ -35,15 +35,15 @@ export default function OutfitCard({ outfit, onAddTag, onRemoveTag, onDeleteOutf
   }
 
   return (
-    <Card className="overflow-hidden relative"> {/* Add relative positioning */}
+    <Card className="overflow-hidden relative"> 
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-2 right-2 rounded-full" // Position the button
+        className="absolute top-2 right-2 rounded-full" 
         onClick={() => onDeleteOutfit(outfit.id)}
       >
         <X className="h-4 w-4" />
-        <span className="sr-only">Delete</span> {/* Accessibility */}
+        <span className="sr-only">Delete</span>
       </Button>
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">{outfit.name}</CardTitle>

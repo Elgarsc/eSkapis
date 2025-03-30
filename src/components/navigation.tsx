@@ -3,7 +3,7 @@
 import { ThemeToggle } from "./theme-toggle"
 import Link from "next/link"
 import { FolderIcon as Hanger, LogIn } from "lucide-react"
-import { SignInButton, SignOutButton, SignUpButton, SignedIn, SignedOut} from "@clerk/nextjs"
+import { SignInButton, SignOutButton, SignedIn, SignedOut} from "@clerk/nextjs"
 import { ThemeProvider } from "./theme-provider";
 
 export function Navigation() {
@@ -50,7 +50,6 @@ export function Navigation() {
                 <SignOutButton/>
               </div>
             </SignedIn>
-            
           </ul>
         </nav>
       </div>

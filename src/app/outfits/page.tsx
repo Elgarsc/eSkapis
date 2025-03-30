@@ -51,7 +51,7 @@ export default function OutfitsPage() {
         outfits={outfits}
         onAddTag={handleAddTag}
         onRemoveTag={handleRemoveTag}
-        onDeleteOutfit={handleDeleteOutfit} // Pass the function
+        onDeleteOutfit={handleDeleteOutfit}
       />
     </main>
   );

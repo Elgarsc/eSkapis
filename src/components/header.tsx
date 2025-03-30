@@ -31,7 +31,6 @@ export function Header() {
                 Account
               </Link>
             </li>
-            import  ThemeToggle  from "@/components/theme-toggle";
           </ul>
         </nav>
       </div>
